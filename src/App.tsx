@@ -1,15 +1,17 @@
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import SearchBar from "./components/SearchBar/SearchBar";
-import WeatherDisplay from "./components/WeatherDisplay/WeatherDisplay";
+import SearchDataWeather from "./components/SearchDataWeather/SearchDataWeather";
 import { SearchProvider } from "./components/SearchContext.tsx";
+import UserLocationWeather from "./components/UserLocationWeather/UserLocationWeather.tsx";
 
 function App() {
   return (
     <SearchProvider>
       <Header />
       <SearchBar />
-      <WeatherDisplay />
+      <SearchDataWeather />
+      <UserLocationWeather />
       <Footer />
     </SearchProvider>
   );
