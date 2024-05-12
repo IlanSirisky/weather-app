@@ -1,5 +1,5 @@
 import React from "react";
-import Icon from "./Icon/Icon";
+import Icon from "../Icon/Icon";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`

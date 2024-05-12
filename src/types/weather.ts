@@ -26,7 +26,7 @@ interface AirQuality {
 }
 
 
-interface Current {
+interface CurrentWeather {
   last_updated_epoch: number;
   last_updated: string;
   temp_c: number;
@@ -53,7 +53,7 @@ interface Current {
   air_quality?: AirQuality;
 }
 
-export interface Weather {
+export interface WeatherData {
   location: Location;
-  current: Current;
+  current: CurrentWeather;
 }
