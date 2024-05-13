@@ -5,17 +5,20 @@ import SearchDataWeather from "./components/SearchDataWeather/SearchDataWeather"
 import { SearchProvider } from "./components/SearchContext.tsx";
 import UserLocationWeather from "./components/UserLocationWeather/UserLocationWeather.tsx";
 import SearchHistory from "./components/SearchHistory/SearchHistory.tsx";
+import { StyledWrapper } from "./styles.ts";
 
 function App() {
   return (
-    <SearchProvider>
-      <Header />
-      <SearchBar />
-      <SearchDataWeather />
-      <UserLocationWeather />
-      <SearchHistory />
-      <Footer />
-    </SearchProvider>
+    <StyledWrapper>
+      <SearchProvider>
+        <Header />
+        <SearchBar />
+        <SearchDataWeather />
+        <UserLocationWeather />
+        <SearchHistory />
+        <Footer />
+      </SearchProvider>
+    </StyledWrapper>
   );
 }
 

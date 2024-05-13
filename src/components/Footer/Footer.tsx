@@ -1,13 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const StyledFooter = styled.footer`
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-`;
+import { StyledFooter } from './styles';
 
 const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();

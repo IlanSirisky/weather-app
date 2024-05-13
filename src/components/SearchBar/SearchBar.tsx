@@ -1,5 +1,11 @@
 import React, { useRef, useContext } from "react";
 import { SearchContext } from "../SearchContext";
+import {
+  StyledSearchBar,
+  SearchForm,
+  SearchInput,
+  SearchButton,
+} from "./styles";
 
 const SearchBar: React.FC = () => {
   const searchElement = useRef<HTMLInputElement>(null);
@@ -15,13 +21,16 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <p>Please enter a city name</p>
-        <input type="search" placeholder="Search a city" ref={searchElement} />
-        <button>Search</button>
-      </form>
-    </div>
+    <StyledSearchBar>
+      <SearchForm onSubmit={handleSubmit}>
+        <SearchInput
+          type="search"
+          placeholder="Search a city"
+          ref={searchElement}
+        />
+        <SearchButton>Search</SearchButton>
+      </SearchForm>
+    </StyledSearchBar>
   );
 };
 
