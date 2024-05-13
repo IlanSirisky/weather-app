@@ -1,30 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useFetchUserLocation = () => {
-  const [userLocation, setUserLocation] = useState<string>(
-    localStorage.getItem("userLocation") || ""
-  );
+  const [userLocation, setUserLocation] = useState<string>("");
 
-  const getUserLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const coords = `${position.coords.latitude},${position.coords.longitude}`;
-          setUserLocation(coords);
-          localStorage.setItem("userLocation", coords);
-        },
-        (error) => {
-          console.error("Error getting user location:", error);
+  useEffect(() => {
+    const storedUserLocation = localStorage.getItem("userLocation");
+    if (!storedUserLocation) {
+      const getUserLocation = () => {
+        // console.log("Fetching user location");
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              // console.log("Location fetched");
+              const coords = `${position.coords.latitude},${position.coords.longitude}`;
+              setUserLocation(coords);
+              localStorage.setItem("userLocation", coords);
+            },
+            (error) => {
+              console.error("Error getting user location:", error);
+            }
+          );
+        } else {
+          console.error("Geolocation is not supported by this browser.");
         }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
-  };
+      };
 
-  if (!userLocation) {
-    getUserLocation();
-  }
+      getUserLocation();
+    } else {
+      setUserLocation(storedUserLocation);
+    }
+  }, []);
 
   return userLocation;
 };
