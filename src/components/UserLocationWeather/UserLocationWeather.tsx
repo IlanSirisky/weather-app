@@ -8,7 +8,7 @@ const UserLocationWeather: React.FC = () => {
   return (
     <div>
       <p>Your current location:</p>
-      <WeatherDisplay location={userLocation} />
+      <WeatherDisplay location={userLocation} isUserLocation={true} />
     </div>
   );
 };
