@@ -1,12 +1,15 @@
+import React from "react";
+import { StyledErrorBlock, ErrorBlockTitle } from "./styles";
+
 const ErrorBlock: React.FC<{ title: string; message: string }> = ({
   title,
   message,
 }) => {
   return (
-    <div>
-      <h2>{title}</h2>
+    <StyledErrorBlock>
+      <ErrorBlockTitle>{title}</ErrorBlockTitle>
       <p>{message}</p>
-    </div>
+    </StyledErrorBlock>
   );
 };
 
