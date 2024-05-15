@@ -12,4 +12,9 @@ export const flexColumn = styled.div`
 
 export const StyledWrapper = styled(flexColumn)`
   background-color: #c9ebf2;
-  min-height: 100vh;`;
+  min-height: 100vh;
+`;
+
+export const ContentWrapper = styled.div`
+  flex: 1;
+`;

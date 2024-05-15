@@ -4,7 +4,7 @@ import WeatherDisplay from "../WeatherDisplay/WeatherDisplay";
 import useFetchUserLocation from "../../hooks/useFetchUserLocation";
 import {StyledWeatherWrapper} from "./styles";
 
-const UserLocationWeather: React.FC = () => {
+const WeatherWrapper: React.FC = () => {
   const userLocation = useFetchUserLocation();
   const { searchTerm } = useContext(SearchContext);
 
@@ -16,4 +16,4 @@ const UserLocationWeather: React.FC = () => {
   );
 };
 
-export default UserLocationWeather;
+export default WeatherWrapper;

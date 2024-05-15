@@ -9,6 +9,11 @@ export const WeatherDisplayContainer = styled(flexRow)`
   border-radius: 20px;
   background-color: aliceblue;
   flex-wrap: wrap;
+  margin: 15px 0;
+
+  @media (max-width: 500px) {
+    width: 75vw;
+  }
 `;
 
 export const WeatherDisplayContent = styled(flexColumn)`

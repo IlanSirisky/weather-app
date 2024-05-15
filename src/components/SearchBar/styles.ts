@@ -6,6 +6,7 @@ export const StyledSearchBar = styled(flexRow)`
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  padding-top: 10px;
 `;
 
 export const SearchForm = styled.form`
