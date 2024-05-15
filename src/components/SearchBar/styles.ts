@@ -1,4 +1,4 @@
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, ListItem } from "@mui/material";
 import styled from "styled-components";
 import { flexRow } from "../../styles";
 
@@ -27,4 +27,11 @@ export const SearchButton = styled(Button)`
   border-radius: 0 20px 20px 0;
   cursor: pointer;
   font-size: 12px;
+`;
+
+export const SearchListItem = styled(ListItem)`
+  &:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
 `;

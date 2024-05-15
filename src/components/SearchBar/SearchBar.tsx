@@ -1,12 +1,13 @@
 import React, { useRef, useContext, useState } from "react";
 import { SearchContext } from "../SearchContext";
-import { List, ListItem, Popover, IconButton, Typography } from "@mui/material";
+import { List, Popover, IconButton, Typography } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import {
   StyledSearchBar,
   SearchForm,
   SearchInput,
   SearchButton,
+  SearchListItem
 } from "./styles";
 
 const SearchBar: React.FC = () => {
@@ -77,14 +78,14 @@ const SearchBar: React.FC = () => {
         }}>
         <List>
           {searchHistory.map((item, index) => (
-            <ListItem
+            <SearchListItem
               key={index}
               onClick={() => {
                 if (searchElement.current) searchElement.current.value = item;
                 handleClose();
               }}>
               {item}
-            </ListItem>
+            </SearchListItem>
           ))}
         </List>
         <IconButton onClick={handleClearHistory}>
