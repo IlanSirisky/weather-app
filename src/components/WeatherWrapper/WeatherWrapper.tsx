@@ -17,3 +17,4 @@ const WeatherWrapper: React.FC = () => {
 };
 
 export default WeatherWrapper;
+
