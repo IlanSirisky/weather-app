@@ -7,11 +7,9 @@ const useFetchUserLocation = () => {
     const storedUserLocation = localStorage.getItem("userLocation");
     if (!storedUserLocation) {
       const getUserLocation = () => {
-        // console.log("Fetching user location");
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             (position) => {
-              // console.log("Location fetched");
               const coords = `${position.coords.latitude},${position.coords.longitude}`;
               setUserLocation(coords);
               localStorage.setItem("userLocation", coords);

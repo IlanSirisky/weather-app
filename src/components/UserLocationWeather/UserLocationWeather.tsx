@@ -4,7 +4,6 @@ import useFetchUserLocation from "../../hooks/useFetchUserLocation";
 
 const UserLocationWeather: React.FC = () => {
   const userLocation = useFetchUserLocation();
-  // console.log("UserLocationWeather component rendered");
 
   return (
     <div>
