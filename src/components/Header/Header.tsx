@@ -1,12 +1,12 @@
 import React from "react";
-import Icon from "../Icon/Icon";
 import { StyledHeader, StyledTitle } from "./styles";
+import weatherIcon from "../../assets/weather-icon.png";
 
 const Header: React.FC = () => {
   return (
     <StyledHeader>
-      <Icon
-        src="https://cdn-icons-png.flaticon.com/512/2204/2204346.png"
+      <img
+        src={weatherIcon}
         alt="Weather icon"
         height="40px"
       />

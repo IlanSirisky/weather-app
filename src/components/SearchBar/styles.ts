@@ -4,6 +4,7 @@ import { flexColumn} from "../../styles";
 export const StyledSearchBar = styled(flexColumn)`
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 export const SearchForm = styled.form`
@@ -22,7 +23,7 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchButton = styled.button`
-  padding: 8px 16px; /* Adjusted padding */
+  padding: 8px 16px;
   background-color: #007bff;
   color: white;
   border: none;

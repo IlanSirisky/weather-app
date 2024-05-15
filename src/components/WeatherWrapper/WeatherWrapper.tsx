@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { SearchContext } from "../SearchContext";
 import WeatherDisplay from "../WeatherDisplay/WeatherDisplay";
 import useFetchUserLocation from "../../hooks/useFetchUserLocation";
+import {StyledWeatherWrapper} from "./styles";
 
 const UserLocationWeather: React.FC = () => {
   const userLocation = useFetchUserLocation();
-  // console.log("UserLocationWeather component rendered");
+  const { searchTerm } = useContext(SearchContext);
 
   return (
-    <div>
-      <p>Your current location:</p>
+    <StyledWeatherWrapper $search={searchTerm}>
+      <WeatherDisplay location={searchTerm} />
       <WeatherDisplay location={userLocation} isUserLocation={true} />
-    </div>
+    </StyledWeatherWrapper>
   );
 };
 
