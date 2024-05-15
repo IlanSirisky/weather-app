@@ -1,7 +1,8 @@
+import { TextField, Button } from "@mui/material";
 import styled from "styled-components";
-import { flexColumn} from "../../styles";
+import { flexRow } from "../../styles";
 
-export const StyledSearchBar = styled(flexColumn)`
+export const StyledSearchBar = styled(flexRow)`
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
@@ -10,23 +11,19 @@ export const StyledSearchBar = styled(flexColumn)`
 export const SearchForm = styled.form`
   display: flex;
   flex-direction: row;
-  border-radius: 20px;
   overflow: hidden;
 `;
 
-export const SearchInput = styled.input`
+export const SearchInput = styled(TextField)`
   flex: 1;
   padding: 10px;
-  border: none;
   border-radius: 20px 0 0 20px;
-  outline: none;
 `;
 
-export const SearchButton = styled.button`
+export const SearchButton = styled(Button)`
   padding: 8px 16px;
-  background-color: #007bff;
   color: white;
-  border: none;
+  border: 1px solid #007bff;
   border-radius: 0 20px 20px 0;
   cursor: pointer;
   font-size: 12px;
