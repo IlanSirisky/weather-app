@@ -8,35 +8,32 @@ import {
   SearchInput,
   SearchButton,
   SearchListItem,
-  ErrorMessage
+  ErrorMessage,
 } from "./styles";
 
 const SearchBar: React.FC = () => {
   const searchElement = useRef<HTMLInputElement>(null);
-  const { setSearchTerm, addToSearchHistory, searchHistory, setSearchHistory } =
+  const { setSearchTerm, searchHistory, setSearchHistory } =
     useContext(SearchContext);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [invalidSearch, setInvalidSearch] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (searchElement.current) {
       const newTerm = searchElement.current.value.trim();
       if (newTerm && isNaN(Number(newTerm))) {
         setSearchTerm(newTerm);
-        addToSearchHistory(newTerm);
         const newHistory = [
           newTerm,
           ...searchHistory.filter((item) => item !== newTerm),
         ].slice(0, 5);
         setSearchHistory(newHistory);
-        localStorage.setItem("searchHistory", JSON.stringify(newHistory));
-        searchElement.current.value = "";
         setInvalidSearch(false);
       } else {
         setInvalidSearch(true);
-        searchElement.current.value = "";
       }
+      searchElement.current.value = "";
     }
   };
 
@@ -71,7 +68,11 @@ const SearchBar: React.FC = () => {
         />
         <SearchButton type="submit">Search</SearchButton>
       </SearchForm>
-      {invalidSearch && <ErrorMessage>Invalid search term. Please enter a valid city name.</ErrorMessage>}
+      {invalidSearch && (
+        <ErrorMessage>
+          Invalid search term. Please enter a valid city name.
+        </ErrorMessage>
+      )}
       <Popover
         id={id}
         open={open}

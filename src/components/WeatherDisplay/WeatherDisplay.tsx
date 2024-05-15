@@ -32,9 +32,9 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
     enabled: location !== "",
   });
 
-  let content = isUserLocation ? <CircularProgress /> : null;
+  let content;
 
-  if (isLoading) {
+  if (isUserLocation || isLoading) {
     content = <CircularProgress />;
   }
 
@@ -48,31 +48,31 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
   }
 
   if (data) {
+    const { current, location: locationData } = data;
+    const { condition, temp_c, humidity, wind_kph } = current;
+    const { name, country, localtime } = locationData;
     content = (
       <WeatherDisplayContainer>
-        <StyledImage
-          src={data.current.condition.icon}
-          alt={data.current.condition.text}
-        />
+        <StyledImage src={condition.icon} alt={condition.text} />
         <WeatherDisplayContent>
-          <StyledTemp>{data.current.temp_c}°C</StyledTemp>
-          <StyledDescription>{data.current.condition.text}</StyledDescription>
+          <StyledTemp>{temp_c}°C</StyledTemp>
+          <StyledDescription>{condition.text}</StyledDescription>
           <StyledLocation>
-            <StyledParagraph>{data.location.name},</StyledParagraph>
+            <StyledParagraph>{name},</StyledParagraph>
             <StyledParagraph>
-              <strong>{data.location.country}</strong>
+              <strong>{country}</strong>
             </StyledParagraph>
           </StyledLocation>
-          <StyledParagraph>{data.location.localtime}</StyledParagraph>
+          <StyledParagraph>{localtime}</StyledParagraph>
           <ExtraDetailsWrapper>
             <ExtraDetails
               image={humidityIcon}
-              data={data.current.humidity + "%"}
+              data={`${humidity}%`}
               description="Humidity"
             />
             <ExtraDetails
               image={windIcon}
-              data={data.current.wind_kph + " km\\h"}
+              data={`${wind_kph} km/h`}
               description="Wind Speed"
             />
           </ExtraDetailsWrapper>
@@ -81,7 +81,7 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
     );
   }
 
-  return <div>{content}</div>;
+  return <>{content}</>;
 };
 
 export default WeatherDisplay;

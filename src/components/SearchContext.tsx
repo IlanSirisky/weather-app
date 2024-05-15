@@ -1,11 +1,16 @@
-import React, { createContext, useState, useEffect, ReactNode } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useMemo,
+} from "react";
 
 interface SearchContextType {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   searchHistory: string[];
   setSearchHistory: React.Dispatch<React.SetStateAction<string[]>>;
-  addToSearchHistory: (term: string) => void;
 }
 
 export const SearchContext = createContext<SearchContextType>({
@@ -13,7 +18,6 @@ export const SearchContext = createContext<SearchContextType>({
   setSearchTerm: () => {},
   searchHistory: [],
   setSearchHistory: () => {},
-  addToSearchHistory: () => {},
 });
 
 export const SearchProvider: React.FC<{ children: ReactNode }> = ({
@@ -26,29 +30,21 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
   });
 
   useEffect(() => {
-    const storedSearchHistory = localStorage.getItem("searchHistory");
-    if (storedSearchHistory) {
-      setSearchHistory(JSON.parse(storedSearchHistory));
-    }
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
   }, [searchHistory]);
 
-  const addToSearchHistory = (term: string) => {
-    setSearchHistory((prevHistory) => [term, ...prevHistory]);
-  };
+  const contextValue = useMemo(
+    () => ({
+      searchTerm,
+      setSearchTerm,
+      searchHistory,
+      setSearchHistory,
+    }),
+    [searchTerm, searchHistory]
+  );
 
   return (
-    <SearchContext.Provider
-      value={{
-        searchTerm,
-        setSearchTerm,
-        searchHistory,
-        setSearchHistory,
-        addToSearchHistory,
-      }}>
+    <SearchContext.Provider value={contextValue}>
       {children}
     </SearchContext.Provider>
   );
