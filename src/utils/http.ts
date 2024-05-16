@@ -3,6 +3,7 @@ import { WeatherData } from "../types/weather";
 
 const apiKey = import.meta.env.VITE_WEATHER_API_KEY || "";
 
+// Fetch weather data from WeatherAPI.com
 export const fetchWeather = async ({
   signal,
   searchTerm,
@@ -11,6 +12,7 @@ export const fetchWeather = async ({
   searchTerm: string;
 }) => {
   try {
+    // Set the request parameters
     const params: AxiosRequestConfig = {
       params: {
         key: apiKey,

@@ -29,10 +29,12 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({
     return storedSearchHistory ? JSON.parse(storedSearchHistory) : [];
   });
 
+  // Update the local storage whenever the search history changes
   useEffect(() => {
     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
   }, [searchHistory]);
 
+  // Create the context value object and memoize it
   const contextValue = useMemo(
     () => ({
       searchTerm,

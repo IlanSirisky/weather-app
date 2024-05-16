@@ -11,20 +11,24 @@ import {
 } from "./styles";
 
 const SearchBar: React.FC = () => {
-  const searchElement = useRef<HTMLInputElement>(null);
-  const inputRef = useRef<HTMLDivElement>(null);
   const { setSearchTerm, searchHistory, setSearchHistory } = useContext(SearchContext);
+  const searchElement = useRef<HTMLInputElement>(null);
+
+  // States and refrences for the popover and error message
+  const inputRef = useRef<HTMLDivElement>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [popoverWidth, setPopoverWidth] = useState<number | null>(null);
   const [invalidSearch, setInvalidSearch] = useState(false);
 
+  // Get the width of the input element to set the width of the popover
   useEffect(() => {
     if (inputRef.current) {
       setPopoverWidth(inputRef.current.offsetWidth);
     }
   }, []);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  // Validate the search term and update the search history once the form is submitted
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (searchElement.current) {
       const newTerm = searchElement.current.value.trim();
@@ -43,22 +47,24 @@ const SearchBar: React.FC = () => {
     }
   };
 
+  // Open the popover
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-    if (searchElement.current) {
-      searchElement.current.focus();
-    }
+
   };
 
+  // Close the popover
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+  // Clear the search history in the context and local storage
   const handleClearHistory = () => {
     setSearchHistory([]);
     localStorage.setItem("searchHistory", JSON.stringify([]));
   };
 
+  // Set the anchor element for the popover
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
