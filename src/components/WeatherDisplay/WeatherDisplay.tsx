@@ -15,14 +15,16 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
   location,
   isUserLocation = false,
 }) => {
+  // Fetch the weather data for the location using the useQuery hook
   const { isLoading, isError, data } = useQuery({
     queryKey: ["weather", { search: location }],
     queryFn: ({ signal }) => fetchWeather({ signal, searchTerm: location }),
     enabled: location !== "",
   });
-  const {searchTerm} = useContext(SearchContext);
-  let content;
+  const { searchTerm } = useContext(SearchContext);
 
+  // Display the loading spinner, error message, or weather data based on the query state
+  let content;
   if (isUserLocation || isLoading) {
     content = <CircularProgress />;
   }

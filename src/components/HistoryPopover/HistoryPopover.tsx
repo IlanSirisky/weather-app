@@ -43,8 +43,8 @@ const HistoryPopover: React.FC<HistoryPopoverProps> = ({
           width: popoverWidth ? `${popoverWidth}px` : "auto",
         },
       },
-    }}
-  >
+    }}>
+    {/* List the items in the search history */}
     <List>
       {searchHistory.map((item, index) => (
         <SearchListItem key={index} onClick={() => onItemClick(item)}>
