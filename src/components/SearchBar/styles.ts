@@ -1,13 +1,18 @@
 import { TextField, Button, ListItem } from "@mui/material";
 import styled from "styled-components";
-import { flexRow } from "../../styles";
+import { flexColumn } from "../../styles";
 
-export const StyledSearchBar = styled(flexRow)`
+export const StyledSearchBar = styled(flexColumn)`
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
   padding-top: 10px;
   position: relative;
+`;
+
+export const SearchFormWrapper = styled(flexColumn)`
+  width: 100%;
+  align-items: center;
 `;
 
 export const SearchForm = styled.form`
@@ -39,11 +44,7 @@ export const SearchListItem = styled(ListItem)`
 `;
 
 export const ErrorMessage = styled.p`
-  position: absolute;
-  bottom: -25px;
-  left: 50%;
-  transform: translateX(-50%);
   color: #ff0000;
   font-size: 12px;
-  margin: 0;
+  margin-top: 10px;
 `;

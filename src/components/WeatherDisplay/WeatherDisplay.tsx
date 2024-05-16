@@ -1,21 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CircularProgress } from "@mui/material";
 import ErrorBlock from "../ErrorBlock/ErrorBlock";
 import { fetchWeather } from "../../utils/http";
 import { useQuery } from "@tanstack/react-query";
-import ExtraDetails from "../ExtraDetails/ExtraDetails";
-import {
-  WeatherDisplayContainer,
-  WeatherDisplayContent,
-  StyledImage,
-  StyledTemp,
-  StyledDescription,
-  ExtraDetailsWrapper,
-  StyledParagraph,
-  StyledLocation,
-} from "./styles";
-import humidityIcon from "../../assets/humidity.svg";
-import windIcon from "../../assets/wind-icon.svg";
+import WeatherInfoPanel from "../WeatherInfoPanel/WeatherInfoPanel";
+import { SearchContext } from "../SearchContext";
 
 interface WeatherDisplayProps {
   location: string;
@@ -26,12 +15,12 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
   location,
   isUserLocation = false,
 }) => {
-  const { isLoading, error, isError, data } = useQuery({
+  const { isLoading, isError, data } = useQuery({
     queryKey: ["weather", { search: location }],
     queryFn: ({ signal }) => fetchWeather({ signal, searchTerm: location }),
     enabled: location !== "",
   });
-
+  const {searchTerm} = useContext(SearchContext);
   let content;
 
   if (isUserLocation || isLoading) {
@@ -41,44 +30,15 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
   if (isError) {
     content = (
       <ErrorBlock
-        title="An error occurred"
-        message={error?.message || "Failed to fetch weather"}
+        title="Hmmm... 🤔"
+        message={`We couldn't find any matches for "${searchTerm}"`}
+        description="Double check your search for any typos - or try a different search term."
       />
     );
   }
 
   if (data) {
-    const { current, location: locationData } = data;
-    const { condition, temp_c, humidity, wind_kph } = current;
-    const { name, country, localtime } = locationData;
-    content = (
-      <WeatherDisplayContainer>
-        <StyledImage src={condition.icon} alt={condition.text} />
-        <WeatherDisplayContent>
-          <StyledTemp>{temp_c}°C</StyledTemp>
-          <StyledDescription>{condition.text}</StyledDescription>
-          <StyledLocation>
-            <StyledParagraph>{name},</StyledParagraph>
-            <StyledParagraph>
-              <strong>{country}</strong>
-            </StyledParagraph>
-          </StyledLocation>
-          <StyledParagraph>{localtime}</StyledParagraph>
-          <ExtraDetailsWrapper>
-            <ExtraDetails
-              image={humidityIcon}
-              data={`${humidity}%`}
-              description="Humidity"
-            />
-            <ExtraDetails
-              image={windIcon}
-              data={`${wind_kph} km/h`}
-              description="Wind Speed"
-            />
-          </ExtraDetailsWrapper>
-        </WeatherDisplayContent>
-      </WeatherDisplayContainer>
-    );
+    content = <WeatherInfoPanel data={data} />;
   }
 
   return <>{content}</>;
