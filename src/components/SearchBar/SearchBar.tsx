@@ -32,7 +32,8 @@ const SearchBar: React.FC = () => {
     event.preventDefault();
     if (searchElement.current) {
       const newTerm = searchElement.current.value.trim();
-      if (newTerm && isNaN(Number(newTerm))) {
+      const isValid = /^[A-Za-z\s]+$/.test(newTerm);
+      if (newTerm && isValid) {
         setSearchTerm(newTerm);
         const newHistory = [
           newTerm,
