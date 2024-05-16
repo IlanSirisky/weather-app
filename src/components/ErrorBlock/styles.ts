@@ -1,14 +1,13 @@
 import styled from "styled-components";
+import { flexColumn } from "../../styles";
 
-export const StyledErrorBlock = styled.div`
+export const StyledErrorBlock = styled(flexColumn)`
   background-color: #f0d9e5;
   padding: 1rem;
   border-radius: 20px;
   margin: 10px;
   color: #890b35;
-  display: flex;
-  gap: 2rem;
-  align-items: center;
+  gap: 1rem;
   text-align: left;
   width: 40vw;
   flex-wrap: wrap;
@@ -20,6 +19,7 @@ export const StyledErrorBlock = styled.div`
   p {
     font-size: 1rem;
     margin: 0;
+    overflow: auto;
   }
 `;
 
